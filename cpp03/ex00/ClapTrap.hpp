@@ -1,35 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/14 14:24:59 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/14 14:46:56 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
+
+#include <iostream>
+
+class ClapTrap{
+    private :
+    std::string name;
+    int hit_points;
+    int energy_points;
+    int attack_damage;
 
 
-#pragma once
+    public :
+    ClapTrap();
+    ~ClapTrap();
+    ClapTrap(std::string name);
+    ClapTrap(const ClapTrap &copy);
 
-# include <iostream>
-# include <string>
-
-class ClapTrap
-{
-	private:
-			std::string		_name;
-			unsigned int	_hit_points;
-			unsigned int	_energy_points;
-			unsigned int	_attack_damage;
-
-	public:
-			ClapTrap();
-			ClapTrap(std::string name);
-			ClapTrap(const ClapTrap &clap);
-			~ClapTrap();
-			ClapTrap			&operator=(const ClapTrap &clap);
+    ClapTrap &operator=(const ClapTrap &copy);
 
 
-			void				attack(const std::string &target);
-			//void				attack(ClapTrap &target);
-			void				takeDamage(unsigned int value);
-			void				beRepaired(unsigned int value);
-			/*const std::string	&getName(void) const;
-			void 				set_name(std::string const name);
-			int					getHp(void) const;
-			int					getEp(void) const;
-			int					getAd(void) const;
-			void 				status(void) const;*/
-	
+    void attack(const std::string& target);
+    void takeDamage( int amount);
+    void beRepaired(int amount);
+
 };
+
+#endif
