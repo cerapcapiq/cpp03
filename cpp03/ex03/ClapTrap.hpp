@@ -1,33 +1,41 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/14 14:24:59 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:57:18 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
 
-class ClapTrap
-{
-	public:
-			ClapTrap();
-			ClapTrap(std::string name);
-			ClapTrap(const ClapTrap &clap);
-			~ClapTrap();
-			ClapTrap			&operator=(const ClapTrap &clap);
-			void				attack(const std::string &target);
-			void				takeDamage(unsigned int value);
-			void				beRepaired(unsigned int value);
-			const std::string	&getName(void) const;
-			void 				set_name(std::string const name);
-			int					getHp(void) const;
-			int					getEp(void) const;
-			int					getAd(void) const;
-			void 				status(void) const;
-	protected:
-			std::string	_name;
-			int			_hp;
-			int			_ep;
-			int			_ad;
+class ClapTrap{
+    protected :
+    std::string name;
+    int hit_points;
+    int energy_points;
+    int attack_damage;
+
+
+    public :
+    ClapTrap();
+    ~ClapTrap();
+    ClapTrap(std::string name);
+    ClapTrap(const ClapTrap &copy);
+
+    ClapTrap &operator=(const ClapTrap &copy);
+
+
+    void attack(const std::string& target);
+    void takeDamage( int amount);
+    void beRepaired(int amount);
+
 };
 
 #endif

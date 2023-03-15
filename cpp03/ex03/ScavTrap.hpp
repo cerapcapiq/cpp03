@@ -1,26 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 11:53:19 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:56:03 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#pragma once
+#include <iostream>
+#include "ClapTrap.hpp"
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
-
-# include "ClapTrap.hpp"
-
-class ScavTrap : virtual public ClapTrap
+class ScavTrap: public ClapTrap
 {
-	public:
-			ScavTrap();
-			ScavTrap(const std::string &name);
-			ScavTrap(const ScavTrap &scav);
-			~ScavTrap();
-			ScavTrap	&operator=(const ScavTrap &scav);
-			void		attack(const std::string &target);
-			void		attack(ClapTrap &target);
-			void		guardGate();
-			void 		status() const;
-	protected:
-			int			_hp;
-			int			_ep;
-			int			_ad;
-};
+    private :
+    bool guard;
 
-#endif
+    public :
+    ScavTrap();
+    ~ScavTrap();
+    ScavTrap(std::string name);
+    ScavTrap(const ScavTrap &copy);
+
+    ScavTrap &operator=(const ScavTrap &copy);
+
+
+    void attack(const std::string& target);
+    void guardGate();
+
+};

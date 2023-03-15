@@ -1,84 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 12:24:55 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:52:26 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 
 #include "DiamondTrap.hpp"
 
-//default constructor function
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap() : ClapTrap("default_clap_trap")
 {
-	std::cout << "DiamondTrap Constructor called" << std::endl;
-	this->_name = "default";
-	ClapTrap::_name = "_clap_name";
-	this->_hp = FragTrap::_hp;
-	this->_ep = ScavTrap::_ep;
-	this->_ad = FragTrap::_ad; 
-
+    this->name = "default_clap_trap";
+    this->hit_points = FragTrap::hit_points;
+	this->energy_points = ScavTrap::energy_points;
+	this->attack_damage = FragTrap::attack_damage;
+    std::cout << "Constructor for DiamondTrap is called, the name is only " << name << std::endl;
 }
 
-//Parameterized contructor to initialize name
-DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name")
+DiamondTrap::DiamondTrap(const DiamondTrap &copy) : ClapTrap(copy), ScavTrap(copy), FragTrap(copy)
 {
-	std::cout << "DiamondTrap Name Constructor called" << std::endl;
-	this->_name = name;
-	//ClapTrap::_name = name + "_clap_name";
-	this->_hp = FragTrap::_hp;
-	this->_ep = ScavTrap::_ep;
-	this->_ad = FragTrap::_ad; 
+        std::cout << "Copy constructor for DiamondTrap is called" << std::endl;
+        *this = copy;
 }
 
-//copy constructor function for DiamondTrap class
-/*used to  initialize the data members of the class using another object of the same class
-copies the values of the data variables of one object of a class to the data member 
-of another object of the same class*/
-DiamondTrap::DiamondTrap(const DiamondTrap &diamond) : ClapTrap(), ScavTrap(), FragTrap()
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_trap")
 {
-	std::cout << "DiamondTrap Copy constructor called" << std::endl;
-	*this = diamond;
+     this->name = name;
+    this->hit_points = FragTrap::hit_points;
+	this->energy_points = ScavTrap::energy_points;
+	this->attack_damage = FragTrap::attack_damage;
+    std::cout << "Constructor for DiamondTrap is called by name " <<  this->name << std::endl;
 }
 
-//copy assignment operator function for DiamondTrap class
-/*used to copy values from one object to another already existing object
-replaces the contents of existing objects*/
-DiamondTrap	&DiamondTrap::operator=(const DiamondTrap &diamond)
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &copy)
 {
-	this->_name = diamond._name;
-	ClapTrap::_name = diamond._name + "_clap_name";
-	this->_hp = diamond._hp;
-	this->_ep = diamond._ep;
-	this->_ad = diamond._ad;
-	return (*this);
+	std::cout << "DiamondTrap Assignation operator called" << std::endl;
+    this->name = copy.name + "_clap_trap";
+    this->hit_points = copy.hit_points;
+    this->energy_points = copy.energy_points;
+    this->attack_damage = copy.attack_damage;
+    return *this;
 }
 
-//destructor function for DiamondTrap class
+
+void DiamondTrap::attack(const std::string& target)
+{
+     ScavTrap::attack(target);
+}
+
+void whoAmI()
+{
+    std::cout << "who am I? am I " << ClapTrap::name << " or am I " << this->name " ?" << std::endl;
+}
+
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "DiamondTrap Destructor called" << std::endl;
+    std::cout << "Destructor for DiamondTrap " << name <<  " is called." << std::endl;
 }
-
-//prints status for all protected members
-void DiamondTrap::status() const 
-{
-  std::cout << "Name:" << this->_name << " HP:" << this->_hp 
-  << " EP:" << this->_ep << " ATT:" << this->_ad << std::endl;
-}
-
-/*check for sufficient ep to perform an action
-reduces ep by 1 if enough ep and action is done,if not nothing is done*/
-void	DiamondTrap::whoAmI()
-{
-	if (this->_hp == 0)
-	{
-		std::cout << "DiamondTrap " << this->_name << " is dead!" << std::endl;
-		return ;
-	}
-	else if (this->_ep > 0)
-	{
-		std::cout << "my name is DiamondTrap " << this->_name 
-		<< " and my ClapTrap name is " << this->ClapTrap::_name << "!" << std::endl;
-		this->_ep--;
-		std::cout << "DiamondTrap " << this->_name << " ep is now "
-			<< this->_ep << std::endl;
-	}
-	else
-		std::cout << "Diamondtrap " << this->_name << " has not enough energy to perform this action!" << std::endl;
-}
-
