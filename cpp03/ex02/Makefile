@@ -1,5 +1,5 @@
-NAME = fragTrap
-SRC = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp main.cpp
+NAME = ex02
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 HEADER = ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
 OBJ = $(SRC:.cpp=.o)
 CXX = c++
@@ -18,6 +18,7 @@ all: $(NAME)
 
 $(NAME): $(HEADER) $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@clear
 	@echo "$(GREEN)ex02 Done!$(WHITE)"
 
 %.o : %.c $(HEADER)

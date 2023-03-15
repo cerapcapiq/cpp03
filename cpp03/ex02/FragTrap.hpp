@@ -1,22 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 12:08:02 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:34:29 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
+#include <iostream>
+#include "ClapTrap.hpp"
 
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
-
-# include "ClapTrap.hpp"
-
-class FragTrap : public ClapTrap
+class FragTrap: public ClapTrap
 {
-	public:
-			FragTrap();
-			FragTrap(const std::string &name);
-			FragTrap(const FragTrap &frag);
-			~FragTrap();
-			FragTrap	&operator=(const FragTrap &frag);
-			void		attack(const std::string &target);
-			void		attack(ClapTrap &target);
-			void        highFivesGuys(void);
-			void 		status() const;
-};
+    private :
 
-#endif
+
+    public :
+    FragTrap();
+    ~FragTrap();
+    FragTrap(std::string name);
+    FragTrap(const FragTrap &copy);
+
+    FragTrap &operator=(const FragTrap &copy);
+
+    void highFivesGuys();
+};

@@ -1,128 +1,128 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 11:54:14 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:33:01 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+#include <iostream>
 
-//default constructor function
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
-	std::cout << "ScavTrap Constructor called" << std::endl;
-	this->_name = "default";
-	this->_hp = 100;
-	this->_ep = 50;
-	this->_ad = 20;
+    this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
+	this->guardGate = false;
+    std::cout << "Constructor for ScavTrap is called, the name is only " << name << std::endl;
 }
 
-//Parameterized contructor to initialize name
-ScavTrap::ScavTrap(const std::string &name)
+ScavTrap::ScavTrap(const ScavTrap &copy)
 {
-	std::cout << "ScavTrap Name Constructor called" << std::endl;
-	this->_name = name;
-	this->_hp = 100;
-	this->_ep = 50;
-	this->_ad = 20;
+        std::cout << "Copy constructor for ScavTrap is called" << std::endl;
+        this->guardGate = copy.guardGate;
 }
 
-//copy constructor function for ScavTrap class
-/*used to  initialize the data members of the class using another object of the same class
-copies the values of the data variables of one object of a class to the data member 
-of another object of the same class*/
-ScavTrap::ScavTrap(const ScavTrap &scav) : ClapTrap()
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "ScavTrap Copy constructor called" << std::endl;
-	*this = scav;
+    this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
+	this->guardGate = false;
+    std::cout << "Constructor for ScavTrap is called by name " <<  name << std::endl;
 }
 
-//copy assignment operator function for ScavTrap class
-/*used to copy values from one object to another already existing object
-replaces the contents of existing objects*/
-ScavTrap	&ScavTrap::operator=(const ScavTrap &scav)
+ScavTrap &ScavTrap::operator=(const ScavTrap &copy)
 {
-	this->_name = scav._name;
-	this->_hp = scav._hp;
-	this->_ep = scav._ep;
-	this->_ad = scav._ad;
-	return (*this);
+	std::cout << "ScavTrap Assignation operator called" << std::endl;
+    this->name = copy.name;
+    this->hit_points = copy.hit_points;
+    this->energy_points = copy.energy_points;
+    this->attack_damage = copy.attack_damage;
+    return *this;
 }
 
-//destructor function for ScavTrap class
+
+void ScavTrap::attack(const std::string& target)
+{
+    if (this->energy_points == 0)
+    {
+        std::cout << "not enough energy to attack" << std::endl;
+    }
+    else if (this->hit_points == 0)
+    {
+        std::cout << name << "already dead" << std::endl;
+    }
+    else
+    {
+    std::cout << "ScavTrap" << name << " attacks " << target << ", causing " << attack_damage << " points of damage!" << std::endl;
+    this->energy_points--;
+    }
+}
+
+void ScavTrap::beRepaired(int amount)
+{
+    if (this->energy_points == 0)
+    {
+        std::cout << " not enough energy to heal" << std::endl;
+    }
+    else if (this->hit_points == 0)
+    {
+        std::cout << this->name << " already dead" << std::endl;
+    } 
+    else if (this->hit_points >= 100)
+    {
+        std::cout << this->name << " already has full HP" << std::endl;
+    }
+    else{
+
+    std::cout << "ScavTrap received " << amount << "heals. Now current HP is " << this->hit_points << std::endl;
+    	this->hit_points += amount;
+    std::cout << "ScavTrap " << this->name << " EP is now " << this->energy_points << std::endl;
+            this->energy_points --;
+    }
+}
+
+
+
+void ScavTrap::takeDamage(int amount)
+{
+    if (this->hit_points == 0)
+    {
+        std::cout << this->name << " already dead" << std::endl;
+    }
+    else if (amount > this->hit_points)
+        this->hit_points = 0;
+    else
+        this->hit_points -= amount;
+    std::cout << "ScavTrap " << this->name << " get " << amount << " damage" << std::endl;
+    std::cout << "ScavTrap " << "current hp is " << this->hit_points << std::endl;
+    if (this->hit_points == 0)
+    {
+        std::cout << this->name << " has died. noob." << std::endl;
+        return;
+    }
+}
+
+void guardGate()
+{
+    if (this->guardGate == false)
+    {
+        this->guardGate == true;
+    std::cout << "ScavTrap " << name << " is entering Gate keeper mode "<< std::endl;
+    }
+    else
+        std::cout << "ScavTrap " << name << " is already in. "<< std::endl;
+}
+
+
+
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap Destructor called" << std::endl;
+    std::cout << "Destructor for ScavTrap " << name <<  "is called for" << std::endl;
 }
-
-//prints status for all protected members
-void ScavTrap::status(void) const 
-{
-  std::cout << "Name:" << this->_name << " HP:" << this->_hp 
-  << " EP:" << this->_ep << " ATT:" << this->_ad << std::endl;
-}
-
-/*check for sufficient ep to perform an action
-reduces ep by 1 if enough ep and action is done,if not nothing is done*/
-void	ScavTrap::attack(const std::string &target)
-{
-	if (this->_hp == 0)
-	{
-		std::cout << "Scavtrap " << this->_name << " is dead!" << std::endl;
-		return ;
-	}
-	else if (this->_ep > 0)
-	{
-		std::cout << "Scavtrap " << this->_name << " attacks " << target
-			<< " causing " << this->_ad << " points of damage!" << std::endl;
-		this->_ep--;
-		std::cout << "Scavtrap " << this->_name << " ep is now "
-			<< this->_ep << std::endl;
-	}
-	else
-		std::cout << "Scavtrap " << this->_name << " has not enough energy to perform this action!" << std::endl;
-}
-
-/*check for sufficient ep to perform an action
-reduces ep by 1 if enough ep and action is done,if not nothing is done
-target is set to ClapTrap class object*/
-void	ScavTrap::attack(ClapTrap &target)
-{
-	if (this->_hp == 0)
-	{
-		std::cout << "Scavtrap " << this->_name << " is dead!" << std::endl;
-		return ;
-	}
-	else if (this->_ep > 0)
-	{
-		if (target.getHp() == 0)
-		{
-			std::cout << "Scavtrap " << this->_name << " tried to attack but " << target.getName() << " is already dead!" << std::endl;
-			return ;
-		}
-		std::cout << "Scavtrap " << this->_name << " attacks " << target.getName()
-			<< " causing " << this->_ad << " points of damage!" << std::endl;
-        target.takeDamage(this->_ad);
-		this->_ep--;
-		std::cout << "Scavtrap " << this->_name << " ep is now "
-			<< this->_ep << std::endl;
-	}
-	else
-		std::cout << "Scavtrap " << this->_name << " has not enough energy to perform this action!" << std::endl;
-}
-
-/*check for sufficient ep to perform an action
-reduces ep by 1 if enough ep and action is done,if not nothing is done*/
-void	ScavTrap::guardGate()
-{
-	if (this->_hp == 0)
-	{
-		std::cout << "Scavtrap " << this->_name << " is dead!" << std::endl;
-		return ;
-	}
-	else if (this->_ep > 0)
-	{
-		std::cout << "Scavtrap " << this->_name << " is now in gate keeper mode! " << std::endl;
-		this->_ep--;
-		std::cout << "Scavtrap " << this->_name << " ep is now "
-			<< this->_ep << std::endl;
-	}
-	else
-		std::cout << "Scavtrap " << this->_name << " has not enough energy to perform this action!" << std::endl;
-}
-
