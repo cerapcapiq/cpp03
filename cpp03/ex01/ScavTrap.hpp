@@ -3,42 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tblaase <tblaase@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 11:49:02 by tblaase           #+#    #+#             */
-/*   Updated: 2022/03/29 16:44:46 by tblaase          ###   ########.fr       */
+/*   Created: 2023/03/15 11:53:19 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:56:03 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Header-protection
 #pragma once
-
-// Includes
+#include <iostream>
 #include "ClapTrap.hpp"
-
-// classes
 
 class ScavTrap: public ClapTrap
 {
-	private:
-		bool _guarding_gate;
-	public:
-	// Constructors
-		ScavTrap();
-		ScavTrap(const ScavTrap &copy);
-		ScavTrap(std::string name);
+    private :
+    bool guard;
 
-	// Deconstructors
-		virtual ~ScavTrap();
+    public :
+    ScavTrap();
+    ~ScavTrap();
+    ScavTrap(std::string name);
+    ScavTrap(const ScavTrap &copy);
 
-	// Overloaded Operators
-		ScavTrap &operator=(const ScavTrap &src);
+    ScavTrap &operator=(const ScavTrap &copy);
 
-	// Public Methods
-		void attack(const std::string &target);
-		void guardGate(void);
-	// Getter
 
-	// Setter
+    void attack(const std::string& target);
+    void guardGate();
 
 };

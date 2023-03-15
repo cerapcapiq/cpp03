@@ -1,47 +1,29 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 11:59:59 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 12:02:32 by abasarud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 int main()
 {
-	std::cout << "### TESTING CLAPTRAP ###\n" << std::endl;
-	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		ClapTrap a;
-		ClapTrap b("Cody");
+    //ScavTrap enemy1 = ScavTrap("enemy1");
+    //ScavTrap enemy2("not_default");
+    ScavTrap enemy1;
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		a.attack("some other robot");
-		a.takeDamage(10);
-		a.takeDamage(10);
-		a.beRepaired(5);
-		a.attack("some other other robot");
-		b.beRepaired(3);
-		for (int i = 0; i < 12; i++)
-			b.attack("Cody-clone");
-		b.beRepaired(3);
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	}
-	std::cout << "\n\n### TESTING SCAVTRAP ###\n" << std::endl;
-	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		ScavTrap c;
-		ScavTrap d("Savage");
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		c.attack("CloneTrap");
-		// for (int i = 0; i < 50; i++)
-		// 	c.attack("CloneTrap");
-		c.beRepaired(22);
-		c.takeDamage(21);
-		c.beRepaired(22);
-		c.guardGate();
-		c.guardGate();
-		d.attack("Savage-clone");
-		d.takeDamage(101);
-		d.takeDamage(15);
-		d.attack("ScavTrap-clone");
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	}
-	return (0);
+    enemy1.attack("GIGACHAD");
+    enemy1.takeDamage(5);
+    enemy1.takeDamage(4);
+    enemy1.beRepaired(4);
+    
+    //enemy3.attack(enemy1);
+
 }

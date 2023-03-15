@@ -3,48 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tblaase <tblaase@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 10:33:58 by tblaase           #+#    #+#             */
-/*   Updated: 2022/03/29 13:30:08 by tblaase          ###   ########.fr       */
+/*   Created: 2023/03/14 14:24:59 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 14:33:37 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Header-protection
-#pragma once
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-// Includes
-#include <string>
 #include <iostream>
 
-// classes
+class ClapTrap{
+    protected :
+    std::string name;
+    int hit_points;
+    int energy_points;
+    int attack_damage;
 
-class ClapTrap
-{
-	protected:
-		std::string _name;
-		unsigned int _hit_pts;
-		unsigned int _energy_pts;
-		unsigned int _attack_dmg;
 
-	public:
-	// Constructors
-		ClapTrap();
-		ClapTrap(const ClapTrap &copy);
-		ClapTrap(std::string name);
+    public :
+    ClapTrap();
+    ~ClapTrap();
+    ClapTrap(std::string name);
+    ClapTrap(const ClapTrap &copy);
 
-	// Deconstructors
-		virtual ~ClapTrap();
+    ClapTrap &operator=(const ClapTrap &copy);
 
-	// Overloaded Operators
-		ClapTrap &operator=(const ClapTrap &src);
 
-	// Public Methods
-		void attack(const std::string &target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
-	// Getter
-
-	// Setter
+    void attack(const std::string& target);
+    void takeDamage( int amount);
+    void beRepaired(int amount);
 
 };
+
+#endif

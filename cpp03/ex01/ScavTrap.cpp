@@ -3,83 +3,126 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tblaase <tblaase@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 12:19:54 by tblaase           #+#    #+#             */
-/*   Updated: 2022/03/29 16:45:12 by tblaase          ###   ########.fr       */
+/*   Created: 2023/03/15 11:54:14 by abasarud          #+#    #+#             */
+/*   Updated: 2023/03/15 14:34:22 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+#include <iostream>
 
-// Constructors
-ScavTrap::ScavTrap(): ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
-	this->_hit_pts = 100;
-	this->_energy_pts = 50;
-	this->_attack_dmg = 20;
-	this->_guarding_gate = false;
-	std::cout << "ScavTrap Default Constructor called" << std::endl;
+    this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
+	this->guard = false;
+    std::cout << "Constructor for ScavTrap is called, the name is only " << name << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy): ClapTrap(copy)
+ScavTrap::ScavTrap(const ScavTrap &copy)
 {
-	this->_guarding_gate = copy._guarding_gate;
-	std::cout << "ScavTrap Copy Constructor called" << std::endl;
+        std::cout << "Copy constructor for ScavTrap is called" << std::endl;
+        this->guard = copy.guard;
 }
 
-ScavTrap::ScavTrap(std::string name): ClapTrap(name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	this->_hit_pts = 100;
-	this->_energy_pts = 50;
-	this->_attack_dmg = 20;
-	this->_guarding_gate = false;
-	std::cout << "ScavTrap Constructor for the name " << this->_name << " called" << std::endl;
+    this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
+	this->guard = false;
+    std::cout << "Constructor for ScavTrap is called by name " <<  name << std::endl;
 }
 
-// Deconstructors
-ScavTrap::~ScavTrap()
-{
-	std::cout << "ScavTrap Deconstructor for " << this->_name << " called" << std::endl;
-}
-
-// Overloaded Operators
-ScavTrap &ScavTrap::operator=(const ScavTrap &src)
+ScavTrap &ScavTrap::operator=(const ScavTrap &copy)
 {
 	std::cout << "ScavTrap Assignation operator called" << std::endl;
-	this->_name = src._name;
-	this->_hit_pts = src._hit_pts;
-	this->_energy_pts = src._energy_pts;
-	this->_attack_dmg = src._attack_dmg;
-	return *this;
+    this->name = copy.name;
+    this->hit_points = copy.hit_points;
+    this->energy_points = copy.energy_points;
+    this->attack_damage = copy.attack_damage;
+    return *this;
 }
 
-// Public Methods
-void	ScavTrap::attack(const std::string &target)
+
+void ScavTrap::attack(const std::string& target)
 {
-	if (this->_energy_pts > 0 && this->_hit_pts > 0)
-	{
-		std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attack_dmg << " points of damage!" << std::endl;
-		this->_energy_pts--;
-	}
-	else if (this->_energy_pts == 0)
-		std::cout << "\033[31mScavTrap " << this->_name << " is not able to attack " << target << ", because he has no energy points left.\033[0m" << std::endl;
-	else
-		std::cout << "\033[31mScavTrap " << this->_name << " is not able to attack " << target << ", because he has not enough hit points.\033[0m" << std::endl;
+    if (this->energy_points == 0)
+    {
+        std::cout << "not enough energy to attack" << std::endl;
+    }
+    else if (this->hit_points == 0)
+    {
+        std::cout << name << "already dead" << std::endl;
+    }
+    else
+    {
+    std::cout << "ScavTrap" << name << " attacks " << target << ", causing " << attack_damage << " points of damage!" << std::endl;
+    this->energy_points--;
+    }
 }
 
-void	ScavTrap::guardGate(void)
+void ScavTrap::beRepaired(int amount)
 {
-	if (this->_guarding_gate == false)
-	{
-		this->_guarding_gate = true;
-		std::cout << "ScavTrap " << this->_name << " is now guarding the gate." << std::endl;
-	}
-	else
-		std::cout << "\033[33mScavTrap " << this->_name << " is already guarding the gate.\033[0m" << std::endl;
+    if (this->energy_points == 0)
+    {
+        std::cout << " not enough energy to heal" << std::endl;
+    }
+    else if (this->hit_points == 0)
+    {
+        std::cout << this->name << " already dead" << std::endl;
+    } 
+    else if (this->hit_points >= 100)
+    {
+        std::cout << this->name << " already has full HP" << std::endl;
+    }
+    else{
+
+    std::cout << "ScavTrap received " << amount << "heals. Now current HP is " << this->hit_points << std::endl;
+    	this->hit_points += amount;
+    std::cout << "ScavTrap " << this->name << " EP is now " << this->energy_points << std::endl;
+            this->energy_points --;
+    }
 }
 
-// Getter
 
-// Setter
 
+void ScavTrap::takeDamage(int amount)
+{
+    if (this->hit_points == 0)
+    {
+        std::cout << this->name << " already dead" << std::endl;
+    }
+    else if (amount > this->hit_points)
+        this->hit_points = 0;
+    else
+        this->hit_points -= amount;
+    std::cout << "ScavTrap " << this->name << " get " << amount << " damage" << std::endl;
+    std::cout << "ScavTrap " << "current hp is " << this->hit_points << std::endl;
+    if (this->hit_points == 0)
+    {
+        std::cout << this->name << " has died. noob." << std::endl;
+        return;
+    }
+}
+
+void guardGate()
+{
+    if (this->guard == false)
+    {
+        this->guard == true;
+    std::cout << "ScavTrap " << this->name << " is entering Gate keeper mode "<< std::endl;
+    }
+    else
+        std::cout << "ScavTrap " << this->name << " is already in. "<< std::endl;
+}
+
+
+
+ScavTrap::~ScavTrap()
+{
+    std::cout << "Destructor for ScavTrap " << name <<  "is called for" << std::endl;
+}
