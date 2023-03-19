@@ -14,7 +14,7 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
-class ScavTrap: public ClapTrap
+class ScavTrap: virtual public ClapTrap
 {
     private :
     bool guard;
@@ -26,6 +26,8 @@ class ScavTrap: public ClapTrap
     ScavTrap(const ScavTrap &copy);
 
     ScavTrap &operator=(const ScavTrap &copy);
+
+    void beRepaired(int amount);
 
 
     void attack(const std::string& target);

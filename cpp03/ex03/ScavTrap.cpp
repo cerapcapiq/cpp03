@@ -88,32 +88,11 @@ void ScavTrap::beRepaired(int amount)
     }
 }
 
-
-
-void ScavTrap::takeDamage(int amount)
-{
-    if (this->hit_points == 0)
-    {
-        std::cout << this->name << " already dead" << std::endl;
-    }
-    else if (amount > this->hit_points)
-        this->hit_points = 0;
-    else
-        this->hit_points -= amount;
-    std::cout << "ScavTrap " << this->name << " get " << amount << " damage" << std::endl;
-    std::cout << "ScavTrap " << "current hp is " << this->hit_points << std::endl;
-    if (this->hit_points == 0)
-    {
-        std::cout << this->name << " has died. noob." << std::endl;
-        return;
-    }
-}
-
-void guardGate()
+void ScavTrap::guardGate()
 {
     if (this->guard == false)
     {
-        this->guard == true;
+        this->guard = true;
     std::cout << "ScavTrap " << name << " is entering Gate keeper mode "<< std::endl;
     }
     else

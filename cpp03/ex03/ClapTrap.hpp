@@ -25,7 +25,7 @@ class ClapTrap{
 
     public :
     ClapTrap();
-    ~ClapTrap();
+    virtual ~ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap &copy);
 
