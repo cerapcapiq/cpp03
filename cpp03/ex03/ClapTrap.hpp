@@ -6,7 +6,7 @@
 /*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:24:59 by abasarud          #+#    #+#             */
-/*   Updated: 2023/03/15 12:57:18 by abasarud         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:18:06 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class ClapTrap{
 
     public :
     ClapTrap();
-    virtual ~ClapTrap();
+    ~ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap &copy);
 

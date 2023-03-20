@@ -6,7 +6,7 @@
 /*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:08:02 by abasarud          #+#    #+#             */
-/*   Updated: 2023/03/15 12:34:29 by abasarud         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:13:27 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 
 class FragTrap: virtual public ClapTrap
 {
-    private :
 
-    
+
     public :
     FragTrap();
     ~FragTrap();

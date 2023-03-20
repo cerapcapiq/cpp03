@@ -6,7 +6,7 @@
 /*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 11:54:14 by abasarud          #+#    #+#             */
-/*   Updated: 2023/03/15 14:34:22 by abasarud         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:45:13 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ ScavTrap::ScavTrap() : ClapTrap()
     std::cout << "Constructor for ScavTrap is called, the name is only " << name << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy)
+ScavTrap::ScavTrap(const ScavTrap &copy): ClapTrap(copy)
 {
         std::cout << "Copy constructor for ScavTrap is called" << std::endl;
         this->guard = copy.guard;
@@ -56,64 +56,21 @@ void ScavTrap::attack(const std::string& target)
     }
     else if (this->hit_points == 0)
     {
-        std::cout << name << "already dead" << std::endl;
+        std::cout << name << " already dead" << std::endl;
     }
     else
     {
-    std::cout << "ScavTrap" << name << " attacks " << target << ", causing " << attack_damage << " points of damage!" << std::endl;
+    std::cout << "ScavTrap " << name << " attacks " << target << ", causing " << attack_damage << " points of damage!" << std::endl;
     this->energy_points--;
     }
 }
 
-void ScavTrap::beRepaired(int amount)
-{
-    if (this->energy_points == 0)
-    {
-        std::cout << " not enough energy to heal" << std::endl;
-    }
-    else if (this->hit_points == 0)
-    {
-        std::cout << this->name << " already dead" << std::endl;
-    } 
-    else if (this->hit_points >= 100)
-    {
-        std::cout << this->name << " already has full HP" << std::endl;
-    }
-    else{
 
-    std::cout << "ScavTrap received " << amount << "heals. Now current HP is " << this->hit_points << std::endl;
-    	this->hit_points += amount;
-    std::cout << "ScavTrap " << this->name << " EP is now " << this->energy_points << std::endl;
-            this->energy_points --;
-    }
-}
-
-
-
-void ScavTrap::takeDamage(int amount)
-{
-    if (this->hit_points == 0)
-    {
-        std::cout << this->name << " already dead" << std::endl;
-    }
-    else if (amount > this->hit_points)
-        this->hit_points = 0;
-    else
-        this->hit_points -= amount;
-    std::cout << "ScavTrap " << this->name << " get " << amount << " damage" << std::endl;
-    std::cout << "ScavTrap " << "current hp is " << this->hit_points << std::endl;
-    if (this->hit_points == 0)
-    {
-        std::cout << this->name << " has died. noob." << std::endl;
-        return;
-    }
-}
-
-void guardGate()
+void ScavTrap::guardGate()
 {
     if (this->guard == false)
     {
-        this->guard == true;
+        this->guard = true;
     std::cout << "ScavTrap " << this->name << " is entering Gate keeper mode "<< std::endl;
     }
     else
@@ -124,5 +81,5 @@ void guardGate()
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "Destructor for ScavTrap " << name <<  "is called for" << std::endl;
+    std::cout << "Destructor for ScavTrap " << name <<  " is called for" << std::endl;
 }

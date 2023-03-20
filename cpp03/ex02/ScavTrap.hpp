@@ -6,7 +6,7 @@
 /*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 11:53:19 by abasarud          #+#    #+#             */
-/*   Updated: 2023/03/15 12:33:19 by abasarud         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:40:47 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 class ScavTrap: public ClapTrap
 {
     private :
-    bool guardGate;
+    bool guard;
 
     public :
     ScavTrap();
-    ~ScavTrap();
+    virtual ~ScavTrap();
     ScavTrap(std::string name);
     ScavTrap(const ScavTrap &copy);
 

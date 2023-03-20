@@ -6,7 +6,7 @@
 /*   By: abasarud <abasarud@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:24:59 by abasarud          #+#    #+#             */
-/*   Updated: 2023/03/14 14:46:56 by abasarud         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:37:07 by abasarud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 
 class ClapTrap{
-    private :
+    protected :
     std::string name;
     int hit_points;
     int energy_points;
